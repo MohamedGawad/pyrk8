@@ -1,0 +1,47 @@
+--- #
+--- # Course :: Problem Diagnosis and Troubleshooting Lab 
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snow-house
+  namespace: snow
+  labels:
+    app: snow-house
+spec:
+  selector:
+    matchLabels:
+      app: snow-house
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: snow-house
+    spec:
+      containers:
+      - name: snow-house
+        image: ibmicpcoc/house:V3
+        imagePullPolicy: Always
+        env:
+          - name: APP_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: APP_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: COLLECTOR_CONFIG
+            valueFrom: 
+              configMapKeyRef:
+                name: snow-collector-config
+                key: COLLECTOR_CONFIG
+          - name: INSTRUCTOR_CONFIG
+            valueFrom: 
+              configMapKeyRef:
+                name: snow-collector-config
+                key: INSTRUCTOR_CONFIG
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
