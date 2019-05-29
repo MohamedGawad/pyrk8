@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: red-student-ui
-        image: ibmicpcoc/collector:V3
+        image: ibmicpcoc/collector:V2
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

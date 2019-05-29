@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: dashboard
-        image: ibmicpcoc/collector:V3
+        image: ibmicpcoc/collector:V2
         imagePullPolicy: Always
         env:
           - name: APP_NAMESPACE
